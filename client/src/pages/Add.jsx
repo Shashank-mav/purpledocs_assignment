@@ -14,6 +14,7 @@ const Add = () => {
 
   const navigate = useNavigate();
 
+  // Handle input changes in the form
   const handleChange = (e) => {
     setBook((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
@@ -21,7 +22,9 @@ const Add = () => {
   const handleClick = async (e) => {
     e.preventDefault();
     try {
+      // Make a POST request to add a new book to the server
       await axios.post("http://localhost:8800/books", book);
+      // Navigate to the home page after successful addition
       navigate("/");
     } catch (err) {
       console.log(err);
@@ -29,6 +32,7 @@ const Add = () => {
     }
   };
 
+  // structure for the add book form
   return (
     <div style={styles.formContainer}>
       <h1 style={styles.formHeading}>Add New Book</h1>
@@ -72,6 +76,7 @@ const Add = () => {
   );
 };
 
+// Styles for the component
 const styles = {
   formContainer: {
     maxWidth: "400px",
@@ -99,9 +104,6 @@ const styles = {
     border: "none",
     borderRadius: "4px",
     cursor: "pointer",
-  },
-  formButtonHover: {
-    backgroundColor: "#0056b3",
   },
   formError: {
     color: "red",

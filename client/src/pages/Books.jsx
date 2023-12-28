@@ -17,15 +17,18 @@ const Books = () => {
     fetchAllBooks();
   }, []);
 
+  // handle book deletion
   const handleDelete = async (id) => {
     try {
       await axios.delete(`http://localhost:8800/books/${id}`);
+      // Reload the page after successful deletion
       window.location.reload();
     } catch (err) {
       console.log(err);
     }
   };
 
+  // structure for displaying books in a table
   return (
     <div style={containerStyle}>
       <h1 style={headerStyle}>Book Shop</h1>
@@ -43,6 +46,7 @@ const Books = () => {
             </tr>
           </thead>
           <tbody>
+            {/* Map through the books array to display each book */}
             {books.map((book) => (
               <tr key={book.id} style={tableRowStyle}>
                 <td style={tableCellStyle}>{book.title}</td>
@@ -73,6 +77,7 @@ const Books = () => {
   );
 };
 
+// Styles for the component
 const containerStyle = {
   maxWidth: "800px",
   margin: "auto",

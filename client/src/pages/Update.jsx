@@ -17,6 +17,7 @@ const Update = () => {
 
   const bookId = location.pathname.split("/")[2];
 
+  // Handle input changes in the form
   const handleChange = (e) => {
     setBook((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
@@ -24,7 +25,9 @@ const Update = () => {
   const handleClick = async (e) => {
     e.preventDefault();
 
+    // List of required fields
     const requiredFields = ["title", "desc", "price", "cover"];
+
     const missing = requiredFields.filter((field) => !book[field]);
 
     if (missing.length > 0) {
@@ -34,6 +37,7 @@ const Update = () => {
 
     try {
       await axios.put(`http://localhost:8800/books/${bookId}`, book);
+      // Navigate to the home page after successful update
       navigate("/");
     } catch (err) {
       console.log(err);
@@ -41,6 +45,7 @@ const Update = () => {
     }
   };
 
+  // structure for the update book form
   return (
     <div style={containerStyle}>
       <h1 style={headerStyle}>Update the Book</h1>
